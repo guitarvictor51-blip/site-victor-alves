@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Victor Alves - Engenharia & Segurança do Trabalho</title>
+    <style>
+        /* Cores baseadas na logo: Escuras para fundo (cinza escuro #2c2c2c, preto #1a1a1a), acentos verde escuro (#004d00 para relatar ao verde da logo), cinza metálico (#4a4a4a) para textos e elementos. Fundo geral escuro para tema noturno/profissional. */
+        :root {
+            --bg-primary: #1a1a1a; /* Preto escuro para fundo principal */
+            --bg-secondary: #2c2c2c; /* Cinza escuro para seções */
+            --text-primary: #e0e0e0; /* Cinza claro para textos principais */
+            --text-secondary: #b0b0b0; /* Cinza médio para subtítulos */
+            --accent-green: #004d00; /* Verde escuro inspirado no "A+" da logo */
+            --accent-silver: #4a4a4a; /* Cinza metálico para bordas/engrenagens */
+            --highlight: #006400; /* Verde médio para hover/CTAs, relatar ao verde da logo */
+        }
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+        header {
+            background-color: var(--bg-secondary);
+            padding: 20px;
+            text-align: center;
+            border-bottom: 2px solid var(--accent-silver);
+        }
+        .logo {
+            max-width: 200px; /* Placeholder: Substitua pela sua imagem da logo */
+            height: auto;
+            margin-bottom: 10px;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        nav a {
+            color: var(--text-primary);
+            text-decoration: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        nav a:hover {
+            background-color: var(--highlight);
+            color: var(--bg-primary);
+        }
+        section {
+            padding: 40px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        #home {
+            background-color: var(--bg-primary);
+            text-align: center;
+        }
+        #home h1 {
+            color: var(--highlight);
+            font-size: 2.5em;
+        }
+        #about, #services, #portfolio, #contact {
+            background-color: var(--bg-secondary);
+            margin: 20px 0;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+        }
+        h2 {
+            color: var(--highlight);
+            border-bottom: 2px solid var(--accent-green);
+            padding-bottom: 10px;
+        }
+        .services-grid, .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .card {
+            background-color: var(--bg-primary);
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid var(--accent-green);
+            transition: transform 0.3s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0,100,0,0.3);
+        }
+        .portfolio-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        input, textarea, button {
+            padding: 10px;
+            border: 1px solid var(--accent-silver);
+            border-radius: 5px;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+        }
+        button {
+            background-color: var(--highlight);
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background-color: var(--accent-green);
+        }
+        footer {
+            background-color: var(--bg-secondary);
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+        }
+        /* Responsivo */
+        @media (max-width: 768px) {
+            nav ul { flex-direction: column; }
+            h1 { font-size: 2em; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="logo.png" alt="Logo Victor Alves" class="logo"> <!-- Substitua por upload da sua logo -->
+        <nav>
+            <ul>
+                <li><a href="#home">Início</a></li>
+                <li><a href="#about">Sobre</a></li>
+                <li><a href="#services">Serviços</a></li>
+                <li><a href="#portfolio">Portfólio</a></li>
+                <li><a href="#contact">Contato</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home">
+        <h1>Victor Alves - Engenharia Mecânica & Segurança do Trabalho</h1>
+        <p>Transformando ideias em soluções seguras e eficientes. Especializado em projetos SolidWorks e laudos NR-12.</p>
+    </section>
+
+    <section id="about">
+        <h2>Sobre Mim</h2>
+        <p>Sou Eng. Victor Alves, com foco em engenharia mecânica e segurança do trabalho. Pós-graduando em Engenharia de Segurança do Trabalho, ofereço serviços autônomos em Sorriso/MT para otimizar suas máquinas e garantir conformidade.</p>
+    </section>
+
+    <section id="services">
+        <h2>Serviços</h2>
+        <div class="services-grid">
+            <div class="card">
+                <h3>Projetos em SolidWorks</h3>
+                <p>Modelagem 3D e desenhos técnicos sob medida.</p>
+            </div>
+            <div class="card">
+                <h3>Laudos Técnicos NR-12</h3>
+                <p>Análise de riscos e adequações para segurança em máquinas.</p>
+            </div>
+            <div class="card">
+                <h3>Consultoria em Segurança</h3>
+                <p>Orientação em normas e otimização industrial.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="portfolio">
+        <h2>Portfólio</h2>
+        <div class="portfolio-grid">
+            <div class="card portfolio-item">
+                <img src="projeto1.jpg" alt="Projeto 1"> <!-- Substitua por imagens reais -->
+                <h3>Braço Robótico</h3>
+                <p>Modelagem e simulação em SolidWorks.</p>
+            </div>
+            <div class="card portfolio-item">
+                <img src="projeto2.jpg" alt="Projeto 2">
+                <h3>Caixa de Engrenagens</h3>
+                <p>Transmissão mecânica otimizada.</p>
+            </div>
+            <!-- Adicione mais itens conforme necessário -->
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2>Contato</h2>
+        <form action="#" method="post"> <!-- Integre com backend se precisar -->
+            <input type="text" placeholder="Seu Nome" required>
+            <input type="email" placeholder="Seu E-mail" required>
+            <textarea placeholder="Mensagem" rows="5" required></textarea>
+            <button type="submit">Enviar</button>
+        </form>
+        <p>Ou mande WhatsApp: (seu número) | Sorriso/MT</p>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Victor Alves. Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        // Smooth scroll para links internos
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
