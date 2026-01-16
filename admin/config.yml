@@ -1,0 +1,22 @@
+backend:
+  name: git-gateway
+  branch: main  # Seu branch principal
+
+media_folder: "images/uploads"  # Pasta pra fotos (crie no repo)
+public_folder: "/images/uploads"  # Como o site acessa
+
+collections:
+  - name: "portfolio"  # Nome da coleção: Projetos
+    label: "Portfólio"  # Título no admin
+    folder: "content/portfolio"  # Pasta pros dados (crie vazia no repo)
+    create: true  # Permite adicionar novos
+    delete: true  # Permite remover
+    fields:
+      - {label: "Título", name: "title", widget: "string", required: true}
+      - {label: "Descrição", name: "description", widget: "text"}
+      - {label: "Thumbnail", name: "thumb", widget: "image", required: true}
+      - label: "Imagens do Projeto"
+        name: "images"
+        widget: "list"
+        field: {label: "Imagem", name: "img", widget: "image"}
+      - {label: "ID do Projeto", name: "id", widget: "string", default: "projX"}  # Ex.: proj4
