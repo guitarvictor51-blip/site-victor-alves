@@ -5,15 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Victor Alves - Engenharia & Segurança do Trabalho</title>
     <style>
-        /* Cores baseadas na logo: Escuras para fundo (cinza escuro #2c2c2c, preto #1a1a1a), acentos verde escuro (#004d00 para relatar ao verde da logo), cinza metálico (#4a4a4a) para textos e elementos. Fundo geral escuro para tema noturno/profissional. */
+        /* Cores escuras baseadas na logo: Suavizadas pra conforto */
         :root {
-            --bg-primary: #1a1a1a; /* Preto escuro para fundo principal */
-            --bg-secondary: #2c2c2c; /* Cinza escuro para seções */
-            --text-primary: #e0e0e0; /* Cinza claro para textos principais */
-            --text-secondary: #b0b0b0; /* Cinza médio para subtítulos */
-            --accent-green: #004d00; /* Verde escuro inspirado no "A+" da logo */
-            --accent-silver: #4a4a4a; /* Cinza metálico para bordas/engrenagens */
-            --highlight: #006400; /* Verde médio para hover/CTAs, relatar ao verde da logo */
+            --bg-primary: #2a2a2a; /* Cinza médio-escuro (menos preto) */
+            --bg-secondary: #3d3d3d; /* Cinza escuro suave */
+            --text-primary: #f0f0f0; /* Cinza claro pra textos */
+            --text-secondary: #b0b0b0; /* Cinza médio */
+            --accent-green: #006400; /* Verde médio da logo (pra títulos) */
+            --accent-silver: #4a4a4a; /* Cinza metálico pra bordas */
+            --highlight: #008000; /* Verde mais vivo pra hover/CTAs */
         }
         body {
             margin: 0;
@@ -29,7 +29,7 @@
             border-bottom: 2px solid var(--accent-silver);
         }
         .logo {
-            max-width: 200px; /* Placeholder: Substitua pela sua imagem da logo */
+            max-width: 200px; /* Ajuste se quiser maior */
             height: auto;
             margin-bottom: 10px;
         }
@@ -45,7 +45,7 @@
             text-decoration: none;
             padding: 10px 15px;
             border-radius: 5px;
-            transition: background 0.3s;
+            transition: background 0.3s ease;
         }
         nav a:hover {
             background-color: var(--highlight);
@@ -86,17 +86,76 @@
             padding: 20px;
             border-radius: 8px;
             border-left: 4px solid var(--accent-green);
-            transition: transform 0.3s;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer; /* Pra indicar clicável no portfólio */
         }
         .card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 6px 12px rgba(0,100,0,0.3);
+            box-shadow: 0 6px 12px rgba(0,128,0,0.3);
         }
-        .portfolio-item img {
+        .portfolio-item .thumb {
             width: 100%;
             height: 200px;
             object-fit: cover;
             border-radius: 5px;
+        }
+        /* Modal pra galeria de imagens */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.9);
+            animation: fadeIn 0.3s;
+        }
+        .modal-content {
+            position: relative;
+            margin: auto;
+            padding: 20px;
+            max-width: 80%;
+            max-height: 80%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-img {
+            max-width: 100%;
+            max-height: 100%;
+            border-radius: 5px;
+        }
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: var(--text-primary);
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 1001;
+        }
+        .close:hover {
+            color: var(--highlight);
+        }
+        .nav-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0,0,0,0.5);
+            color: var(--text-primary);
+            border: none;
+            font-size: 30px;
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 50%;
+        }
+        .prev { left: 20px; }
+        .next { right: 20px; }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
         form {
             display: flex;
@@ -115,7 +174,7 @@
         button {
             background-color: var(--highlight);
             cursor: pointer;
-            transition: background 0.3s;
+            transition: background 0.3s ease;
         }
         button:hover {
             background-color: var(--accent-green);
@@ -128,14 +187,15 @@
         }
         /* Responsivo */
         @media (max-width: 768px) {
-            nav ul { flex-direction: column; }
+            nav ul { flex-direction: column; gap: 10px; }
             h1 { font-size: 2em; }
+            .modal-content { max-width: 95%; padding: 10px; }
         }
     </style>
 </head>
 <body>
     <header>
-        <img src="logo.png" alt="Logo Victor Alves" class="logo"> <!-- Substitua por upload da sua logo -->
+        <img src="logo.png" alt="Logo Victor Alves" class="logo"> <!-- Upload sua logo aqui -->
         <nav>
             <ul>
                 <li><a href="#home">Início</a></li>
@@ -176,31 +236,49 @@
     </section>
 
     <section id="portfolio">
-        <h2>Portfólio</h2>
+        <h2>Portfólio de Projetos</h2>
+        <p>Aqui vão meus projetos em SolidWorks e estudos em laudos. Clique em um pra ver detalhes!</p>
         <div class="portfolio-grid">
-            <div class="card portfolio-item">
-                <img src="projeto1.jpg" alt="Projeto 1"> <!-- Substitua por imagens reais -->
+            <!-- Projeto 1: Exemplo - Troque imagens e texto -->
+            <div class="card portfolio-item" onclick="openModal('proj1')">
+                <img src="proj1-thumb.jpg" alt="Thumbnail Projeto 1" class="thumb"> <!-- Upload mini imagem -->
                 <h3>Braço Robótico</h3>
-                <p>Modelagem e simulação em SolidWorks.</p>
+                <p>Modelagem 3D com 4 graus de liberdade. Simulação de movimento.</p>
             </div>
-            <div class="card portfolio-item">
-                <img src="projeto2.jpg" alt="Projeto 2">
+            <!-- Projeto 2 -->
+            <div class="card portfolio-item" onclick="openModal('proj2')">
+                <img src="proj2-thumb.jpg" alt="Thumbnail Projeto 2" class="thumb">
                 <h3>Caixa de Engrenagens</h3>
-                <p>Transmissão mecânica otimizada.</p>
+                <p>Transmissão helicoidal otimizada para eficiência.</p>
             </div>
-            <!-- Adicione mais itens conforme necessário -->
+            <!-- Projeto 3 - Adicione mais assim -->
+            <div class="card portfolio-item" onclick="openModal('proj3')">
+                <img src="proj3-thumb.jpg" alt="Thumbnail Projeto 3" class="thumb">
+                <h3>Mecanismo de Garra</h3>
+                <p>Design mecânico com linkages pra automação.</p>
+            </div>
         </div>
     </section>
 
+    <!-- Modal pra galeria de imagens -->
+    <div id="imageModal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <div class="modal-content">
+            <button class="nav-arrow prev" onclick="changeImage(-1)">&#10094;</button>
+            <img class="modal-img" id="modalImg">
+            <button class="nav-arrow next" onclick="changeImage(1)">&#10095;</button>
+        </div>
+    </div>
+
     <section id="contact">
         <h2>Contato</h2>
-        <form action="#" method="post"> <!-- Integre com backend se precisar -->
+        <form action="#" method="post"> <!-- Integre com Formspree depois -->
             <input type="text" placeholder="Seu Nome" required>
             <input type="email" placeholder="Seu E-mail" required>
             <textarea placeholder="Mensagem" rows="5" required></textarea>
             <button type="submit">Enviar</button>
         </form>
-        <p>Ou mande WhatsApp: (seu número) | Sorriso/MT</p>
+        <p>Ou mande WhatsApp: [seu número] | Sorriso/MT</p>
     </section>
 
     <footer>
@@ -208,15 +286,44 @@
     </footer>
 
     <script>
-        // Smooth scroll para links internos
+        // Modal functions
+        let currentProject = [];
+        let currentIndex = 0;
+
+        function openModal(projectId) {
+            const projects = {
+                proj1: ['proj1-img1.jpg', 'proj1-img2.jpg', 'proj1-img3.jpg'], // Upload essas imagens
+                proj2: ['proj2-img1.jpg', 'proj2-img2.jpg'],
+                proj3: ['proj3-img1.jpg', 'proj3-img2.jpg', 'proj3-img3.jpg']
+            };
+            currentProject = projects[projectId] || ['default.jpg'];
+            currentIndex = 0;
+            document.getElementById('modalImg').src = currentProject[0];
+            document.getElementById('imageModal').style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('imageModal').style.display = 'none';
+        }
+
+        function changeImage(direction) {
+            currentIndex = (currentIndex + direction + currentProject.length) % currentProject.length;
+            document.getElementById('modalImg').src = currentProject[currentIndex];
+        }
+
+        // Smooth scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
+                document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
             });
         });
+
+        // Fecha modal clicando fora
+        window.onclick = function(event) {
+            const modal = document.getElementById('imageModal');
+            if (event.target == modal) closeModal();
+        }
     </script>
 </body>
 </html>
